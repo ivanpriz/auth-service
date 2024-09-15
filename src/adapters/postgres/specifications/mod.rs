@@ -9,6 +9,7 @@ pub enum CompType<T> {
 pub enum UsersSpecification {
     Id(CompType<i32>),
     Username(CompType<String>),
+    Email(CompType<String>),
 }
 
 pub trait Specification {}

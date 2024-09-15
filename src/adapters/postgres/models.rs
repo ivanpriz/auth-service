@@ -8,9 +8,9 @@ use diesel::prelude::*;
 pub struct UserModel {
     pub id: i32,
     pub username: String,
+    pub email: String,
     pub hashed_pwd: String,
     pub registration_date: NaiveDateTime,
-    pub interests: String,
 }
 
 impl UserModel {
@@ -20,7 +20,7 @@ impl UserModel {
             username: dto.username.clone(),
             hashed_pwd: dto.hashed_pwd.clone(),
             registration_date: dto.registration_date,
-            interests: dto.interests.clone(),
+            email: dto.email.clone(),
         }
     }
 }
@@ -31,5 +31,5 @@ pub struct NewUserModel<'a> {
     pub username: &'a str,
     pub hashed_pwd: &'a str,
     pub registration_date: &'a NaiveDateTime,
-    pub interests: &'a str,
+    pub email: &'a str,
 }

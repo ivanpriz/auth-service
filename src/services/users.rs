@@ -23,7 +23,7 @@ impl UsersService {
             username: user.username.clone(),
             hashed_pwd,
             registration_date,
-            interests: user.interests.clone(),
+            email: user.email.clone(),
         };
         let mut uow = self.uow_factory.create_uow().await;
         UsersRepo::create_from_dto(&user_create_db_dto, &mut uow).await
@@ -171,7 +171,7 @@ mod tests {
                 username: "John".to_string(),
                 hashed_pwd: bcrypt::hash("hashed_pwd##").unwrap(),
                 registration_date: chrono::Utc::now().naive_utc(),
-                interests: "Programming, gaming".to_string(),
+                email: "john@mail.com".to_string(),
             },
         )])
     }
@@ -182,7 +182,7 @@ mod tests {
             username: "John".to_string(),
             hashed_pwd: bcrypt::hash("hashed_pwd##").unwrap(),
             registration_date: chrono::Utc::now().naive_utc(),
-            interests: "Programming, gaming".to_string(),
+            email: "john@mail.com".to_string(),
         }]
     }
 
@@ -191,7 +191,7 @@ mod tests {
         vec![UserCreateInDTO {
             username: "John".to_string(),
             password: "hashed_pwd##".to_string(),
-            interests: "Programming, gaming".to_string(),
+            email: "john@mail.com".to_string(),
         }]
     }
 
@@ -259,7 +259,7 @@ mod tests {
         assert!(
             created_user.username == default_users_create[0].username
                 && created_user.registration_date.date() == default_users_create[0].registration_date.date() // can only compare date here
-                && created_user.interests == default_users_create[0].interests
+                && created_user.email == default_users_create[0].email
         )
     }
 
@@ -279,7 +279,7 @@ mod tests {
                 user_found.username == user_db_dto.username
                     && user_found.hashed_pwd == user_db_dto.hashed_pwd
                     && user_db_dto.registration_date.date() == user_db_dto.registration_date.date()
-                    && user_db_dto.interests == user_db_dto.interests
+                    && user_db_dto.email == user_db_dto.email
             );
         }
     }
@@ -302,7 +302,7 @@ mod tests {
                 user_found.username == user_db_dto.username
                     && user_found.hashed_pwd == user_db_dto.hashed_pwd
                     && user_db_dto.registration_date.date() == user_db_dto.registration_date.date()
-                    && user_db_dto.interests == user_db_dto.interests
+                    && user_db_dto.email == user_db_dto.email
             );
         }
     }

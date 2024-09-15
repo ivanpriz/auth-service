@@ -18,7 +18,7 @@ impl Repository<UserCreateDTO, UserDBDTO, UsersSpecification> for UsersRepo {
             username: &user_create_data.username,
             hashed_pwd: &user_create_data.hashed_pwd,
             registration_date: &user_create_data.registration_date,
-            interests: &user_create_data.interests,
+            email: &user_create_data.email,
         };
 
         let user = diesel::insert_into(users::table)
@@ -33,7 +33,7 @@ impl Repository<UserCreateDTO, UserDBDTO, UsersSpecification> for UsersRepo {
             username: user.username,
             hashed_pwd: user.hashed_pwd,
             registration_date: user.registration_date,
-            interests: user.interests,
+            email: user.email,
         }
     }
 
@@ -67,7 +67,7 @@ impl Repository<UserCreateDTO, UserDBDTO, UsersSpecification> for UsersRepo {
                 username: user.username,
                 hashed_pwd: user.hashed_pwd,
                 registration_date: user.registration_date,
-                interests: user.interests,
+                email: user.email,
             }),
             Ok(None) => None,
             Err(_) => None,
@@ -176,7 +176,7 @@ mod tests {
                 username: "John".to_string(),
                 hashed_pwd: "hashed_pwd##".to_string(),
                 registration_date: chrono::offset::Utc::now().naive_utc(),
-                interests: "Programming, gaming".to_string(),
+                email: "john@mail.com".to_string(),
             },
         )])
     }
@@ -187,7 +187,7 @@ mod tests {
             username: "John".to_string(),
             hashed_pwd: "hashed_pwd##".to_string(),
             registration_date: chrono::Utc::now().naive_utc(),
-            interests: "Programming, gaming".to_string(),
+            email: "john@mail.com".to_string(),
         }]
     }
 
@@ -282,7 +282,7 @@ mod tests {
                     user_in_db.username == user.username
                         && user_in_db.hashed_pwd == user.hashed_pwd
                         && user_in_db.registration_date.date() == user.registration_date.date()
-                        && user_in_db.interests == user.interests
+                        && user_in_db.email == user.email
                 );
             }
         }
@@ -308,7 +308,7 @@ mod tests {
                     && created_user.hashed_pwd == default_users_create[0].hashed_pwd
                     && created_user.registration_date.date()
                         == default_users_create[0].registration_date.date()
-                    && created_user.interests == default_users_create[0].interests
+                    && created_user.email == default_users_create[0].email
             )
         }
     }

@@ -6,6 +6,6 @@ diesel::table! {
         username -> Varchar,
         hashed_pwd -> Varchar,
         registration_date -> Timestamp,
-        interests -> Text,
+        email -> Varchar,
     }
 }

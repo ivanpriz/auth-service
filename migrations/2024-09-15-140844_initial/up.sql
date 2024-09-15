@@ -4,6 +4,6 @@ CREATE TABLE "users"(
 	"username" VARCHAR NOT NULL,
 	"hashed_pwd" VARCHAR NOT NULL,
 	"registration_date" TIMESTAMP NOT NULL,
-	"interests" TEXT NOT NULL
+	"email" VARCHAR NOT NULL
 );
 

@@ -13,12 +13,17 @@ diesel = { version = "2.1.1", features = ["chrono", "postgres"] }
 diesel-async = { version = "0.4.1", features = ["postgres", "deadpool"] }
 diesel_migrations = "2.1.0"
 dotenvy = "0.15.7"
+http-body-util = "0.1.2"
 jsonwebtoken = "9.3.0"
+mime = "0.3.17"
 pwhash = "1.0.0"
-rstest = "0.21.0"
+rstest = "0.22.0"
 serde = "1.0.204"
 serde_json = "1.0.120"
 serial_test = "3.1.1"
 tokio = { version = "1.38.0", features = ["full", "rt-multi-thread"] }
 utoipa = { version = "4.2.3", features = ["axum_extras"] }
 utoipa-swagger-ui = { version = "7.1.0", features = ["axum"] }
+
+[dev-dependencies]
+tower = { version = "0.4", features = ["util"] }

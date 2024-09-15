@@ -312,14 +312,9 @@ mod tests {
     fn test_create_user_one_should_succeed(
         _migrations: WithCleanup<()>,
         axum_app: (Router, Runtime),
-        // default_users_create: Vec<UserCreateDTO>,
+        default_users_create_in: Vec<UserCreateInDTO>,
     ) {
         let (mut app, runtime) = axum_app;
-        let req_data = UserCreateInDTO {
-            username: String::from("nagibator"),
-            password: String::from("qwerty123"),
-            email: String::from("vasya2003@mail.ru"),
-        };
         let resp = runtime
             .block_on(
                 app.oneshot(
@@ -327,7 +322,9 @@ mod tests {
                         .method(http::Method::POST)
                         .header(http::header::CONTENT_TYPE, mime::APPLICATION_JSON.as_ref())
                         .uri("/register")
-                        .body(Body::from(serde_json::to_string(&req_data).unwrap()))
+                        .body(Body::from(
+                            serde_json::to_string(&default_users_create_in[0]).unwrap(),
+                        ))
                         .unwrap(),
                 ),
             )
@@ -344,9 +341,8 @@ mod tests {
             body,
             json!({
                "id": 1,
-               "username": "nagibator",
-               "email": "vasya2003@mail.ru"
-
+               "username": default_users_create_in[0].username,
+               "email": default_users_create_in[0].email
             })
         );
     }
